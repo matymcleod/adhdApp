@@ -1,0 +1,29 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="/urls">TinyApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/urls">My URLs</a>
+        <a class="nav-item nav-link" href="/urls/new">Create New URL</a>
+      </div>
+      <% if(user) { %>
+      <span style="margin-right: 5em; margin-left: 5em; font-weight: bold; color: grey;">Welcome to TinyApp: <%= user.email %></span>
+      <form method="POST" action="/logout" >
+        <button type="submit" class="btn btn-primary" style="margin-left: 2em;">Logout</button>
+      </form>
+    </div>
+    <% } else { %>
+
+      <!-- show THIS code when i am logged out. it contains login and registration buttons. -->  
+    <!-- <form method="GET" action="/login">
+      <button type="submit" class="btn btn-primary" style="margin-left: 2em; margin-top: 1em;">Login</button>
+    </form>
+    <form method="GET" action="/register">
+      <button type="submit"class="btn btn-primary" style="margin-left: 2em; margin-top: 1em;">Register</button>
+    </form> -->
+     <% } %>
+  </nav>
+</header>

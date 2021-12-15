@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+ 
+  <title>TinyApp</title>
+</head>
+<body>
+  
+  <%- include('partials/_header') %>
+  
+<div style="display: align-left;">
+  <h1 class="heading" style="margin-left: 1em;">Create Account</h1>
+
+  <form method="POST" action="register">
+    <input name="email" placeholder="Enter Email" style="width: 300px; margin-left: 2em">
+    <br/>
+
+    <div style="margin: 1em;"></div>
+ 
+    <div></div>
+    <input name="password" type="password" placeholder="Password" style="width: 300px; margin-left: 2em">
+    <br/>
+
+    <button type="submit" class="btn btn-primary" style="margin-left: 2em; margin-top: 1em;">Register</button>
+  </form>
+
+  <div style="margin-left: 2em; margin-top: 1em; width: 40%;" class="alert alert-warning" role="alert">
+    Already have an account? <a href="/login" class="alert-link">Login here</a>. to start creating Tiny URLs.
+
+</div>
+</body>
