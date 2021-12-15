@@ -261,5 +261,5 @@ app.post('/logout', (req, res) => {
 
 // Server setting and port assignment
 app.listen(PORT, () => {
-  console.log(`TinyApp is listening on port ${PORT}!`);
+  console.log(`adhdApp is listening on port ${PORT}!`);
 });
