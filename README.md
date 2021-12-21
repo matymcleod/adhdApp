@@ -1,6 +1,6 @@
-# TinyApp Project
+# adhdApp Project
 
-TinyApp is a full stack web application built with Node and Express that allows users to shorten long URLs (à la bit.ly).
+adhdApp is a helper app for persons with adhd. Features include tasks with timers and alerts. Strategies for when plans change, need to stay focussed for longer than possible, self-regulation techniques. Aso, there will be a support community and social aspect.   
 
 ## Final Product
 

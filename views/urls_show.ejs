@@ -3,7 +3,7 @@
 <head>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <title>URL - TinyApp Example</title>
+  <title>adhdApp</title>
 </head>
 
 <body>
@@ -11,15 +11,15 @@
   <div class="card text-center">
       <div class="card-header"></div>
       <div class="card-body">
-        <h5 class="card-title">TinyURL for: <%= longURL %></h5>
-        <p class="card-text">Short URL: <a href="<%= longURL %>"><%= shortURL %></a></p>
+        <h5 class="card-title">adhd skill for: <%= longURL %></h5>
+        <p class="card-text">Short term: <a href="<%= longURL %>"><%= shortURL %></a></p>
       </div>
     <div class="card-footer text-muted"></div>
   </div>
   <div class="card text-center">
     <div class="card-header"></div>
     <div class="card-body">
-      <p class="card-text">Edit a URL: 
+      <p class="card-text">Edit a skill: 
         <td>
         <form method="POST" action="/urls/<%=shortURL%>">
         <input type="url" name="newLongURL" value="<%=longURL%>">
