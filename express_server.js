@@ -14,7 +14,7 @@ const app = express();
 // This the default server port
 const PORT = 8080;
 // All helper functions kept in seperate file
-const { generateRandomString, getUserByEmail, tasksForUser } = require('./functions');
+const { generateRandomString, getUserByEmail, tasksForUser } = require('./helpers');
 
 
 // * * * APP SETTINGS * * * //

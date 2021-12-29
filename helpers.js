@@ -25,18 +25,18 @@ const getUserByEmail = function(email, users) {
 };
 
 // USER URL ASSINGMENT
-const urlsForUser = function(id, urlDatabase) {
-  let urls = {};
+const tasksForUser = function(id, urlDatabase) {
+  let tasks = {};
   for (let key in urlDatabase) {
     if (urlDatabase[key].userID === id) {
-      urls[key] = urlDatabase[key];
+      tasks[key] = urlDatabase[key];
     }
   }
-  return urls;
+  return tasks;
 };
 
 module.exports = {
   generateRandomString,
   getUserByEmail,
-  urlsForUser
+  tasksForUser
 };

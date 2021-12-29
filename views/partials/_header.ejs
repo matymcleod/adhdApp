@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="/tasks">My tasks</a>
-        <a class="nav-item nav-link" href="/urls/new">Create New Task</a>
+        <a class="nav-item nav-link" href="/tasks/new">Create New Task</a>
       </div>
       <% if(user) { %>
       <span style="margin-right: 5em; margin-left: 5em; font-weight: bold; color: grey;">Welcome to adhdApp: <%= user.email %></span>
@@ -17,13 +17,13 @@
     </div>
     <% } else { %>
 
-      <!-- show THIS code when i am logged out. it contains login and registration buttons. -->  
-    <!-- <form method="GET" action="/login">
+      <!-- show THIS code when i am logged out. it contains login and registration buttons.   -->
+    <form method="GET" action="/login">
       <button type="submit" class="btn btn-primary" style="margin-left: 2em; margin-top: 1em;">Login</button>
     </form>
     <form method="GET" action="/register">
       <button type="submit"class="btn btn-primary" style="margin-left: 2em; margin-top: 1em;">Register</button>
-    </form> -->
+    </form>
      <% } %>
   </nav>
 </header>
