@@ -14,7 +14,7 @@ const app = express();
 // This the default server port
 const PORT = 8080;
 // All helper functions kept in seperate file
-const { generateRandomString, getUserByEmail, urlsForUser } = require('./functions');
+const { generateRandomString, getUserByEmail, tasksForUser } = require('./functions');
 
 
 // * * * APP SETTINGS * * * //
@@ -34,7 +34,7 @@ app.use(cookieSession({
 // * * * DATABASES * * * //
 
 
-// This is where user URLs are stored, these URLs are for testing
+// This is where user tasks are stored, these tasks are for testing
 const urlDatabase = {
   b6UTxQ: {
     longURL: "https://www.tsn.ca",
@@ -49,14 +49,14 @@ const urlDatabase = {
 // This is where and how user data is stored, these are bunk users for testing
 const users = {
   userRandomID: {
-    id: "userRandomID",
-    email: "user@example.com",
-    password: bcrypt.hashSync("abcd", 10)
+    id: "admin",
+    email: "matymcleod@gmail.com",
+    password: bcrypt.hashSync("a", 10)
   },
   user2RandomID: {
     id: "user2RandomID",
-    email: "user2@example.com",
-    password: bcrypt.hashSync("1234", 10)
+    email: "a@a.com",
+    password: bcrypt.hashSync("a", 10)
   }
 };
 
@@ -64,34 +64,34 @@ const users = {
 // * * * GET REQUESTS * * * //
 
 
-// - - - REDIRECT TO URLS - - - //
-// Redirects to the urls page if no address is defined
+// - - - REDIRECT TO tasks - - - //
+// Redirects to the tasks page if no address is defined
 app.get('/', (req, res) => {
-  res.redirect("/urls");
+  res.redirect("/tasks");
 });
 
 
-// - - - VIEW URLS - - - //
-// Sets permissions to view URLS if logged in or else gets redirected back to login page
-app.get('/urls', (req, res) => {
+// - - - VIEW tasks - - - //
+// Sets permissions to view tasks if logged in or else gets redirected back to login page
+app.get('/tasks', (req, res) => {
   if (req.session.user_id) {
     const userId = req.session.user_id;
     const user = users[userId];
-    const urls = urlsForUser(userId, urlDatabase);
+    const tasks = tasksForUser(userId, urlDatabase);
     const templateVars = {
-      urls,
+      tasks,
       user
     };
-    res.render('urls_index', templateVars);
+    res.render('tasks_index', templateVars);
   } else {
     res.redirect('/login');
   }
 });
 
 
-// - - - NEW URLS - - - //
-// Sets permissions to create new URLs if logged in or else user gets redirected to login page
-app.get('/urls/new', (req, res) => {
+// - - - NEW tasks - - - //
+// Sets permissions to create new tasks if logged in or else user gets redirected to login page
+app.get('/tasks/new', (req, res) => {
   const userId = req.session.user_id;
   if (!userId) {
     res.redirect('/login');
@@ -99,16 +99,16 @@ app.get('/urls/new', (req, res) => {
   }
   const user = users[userId];
   const templateVars = {
-    urls: urlDatabase,
+    tasks: urlDatabase,
     user: user
   };
-  res.render("urls_new", templateVars);
+  res.render("tasks_new", templateVars);
 });
 
 
-// - - - VIEW URLS - - - //
-// Sets permissions to view short URLs if logged in
-app.get('/urls/:shortURL', (req, res) => {
+// - - - VIEW tasks - - - //
+// Sets permissions to view short tasks if logged in
+app.get('/tasks/:shortURL', (req, res) => {
   const userId = req.session.user_id;
   const user = users[userId];
   const url = urlDatabase[req.params.shortURL];
@@ -116,13 +116,13 @@ app.get('/urls/:shortURL', (req, res) => {
     res.send('There is no record of that url on your account!')
   }
   if (userId !== url.userID) {
-    return res.status(403).send('Please login to view your urls!');
+    return res.status(403).send('Please login to view your tasks!');
   }
   const templateVars = {
     user: user,
     shortURL: req.params.shortURL,
     longURL: url.longURL };
-  res.render('urls_show', templateVars);
+  res.render('tasks_show', templateVars);
 });
 
 
@@ -162,7 +162,7 @@ app.get('/login', (req, res) => {
 
 // - - - CREATE URL - - - //
 // Create a new URL and short URL is generated via generateRandomString helper function
-app.post('/urls', (req, res) => {
+app.post('/tasks', (req, res) => {
   const userId = req.session.user_id;
   if (userId) {
     let shortURL = generateRandomString();
@@ -170,7 +170,7 @@ app.post('/urls', (req, res) => {
       longURL: req.body.longURL,
       userID: userId
     };
-    res.redirect('/urls/' + shortURL);
+    res.redirect('/tasks/' + shortURL);
   } else {
     return res.status(403).send('Please login to create a URL!');
   }
@@ -178,15 +178,15 @@ app.post('/urls', (req, res) => {
 
 
 // - - - DELETE URL- - - //
-// Users can only delete their own URLs
-app.post('/urls/:shortURL/delete', (req, res) => {
+// Users can only delete their own tasks
+app.post('/tasks/:shortURL/delete', (req, res) => {
   const userId = req.session.user_id;
   let shortURL = req.params.shortURL;
   const url = urlDatabase[shortURL];
   const usersURL = url && url.userID === userId;
   if (usersURL) {
     delete urlDatabase[shortURL];
-    res.redirect('/urls');
+    res.redirect('/tasks');
   } else {
     return res.status(403).send('Please login to delete a URL!');
   }
@@ -194,13 +194,13 @@ app.post('/urls/:shortURL/delete', (req, res) => {
 
 
 // - - - EDIT URL- - - //
-// Users can only edit their own URLs
-app.post('/urls/:id', (req, res) => {
+// Users can only edit their own tasks
+app.post('/tasks/:id', (req, res) => {
   const userId = req.session.user_id;
   if (userId) {
     let shortURL = req.params.id;
     urlDatabase[shortURL].longURL = req.body.newLongURL;
-    res.redirect('/urls');
+    res.redirect('/tasks');
   } else {
     return res.status(403).send('Please login to edit this URL!');
   }
@@ -229,7 +229,7 @@ app.post('/register', (req, res) => {
   }
   users[id] = user;
   req.session.user_id = id;
-  res.redirect('/urls');
+  res.redirect('/tasks');
 });
 
 
@@ -244,7 +244,7 @@ app.post('/login', (req, res) => {
   const user = getUserByEmail(email, users);
   if (user && bcrypt.compareSync(password, user.password)) {
     req.session.user_id = user.id;
-    res.redirect('/urls');
+    res.redirect('/tasks');
   } else {
     res.status(403).send('User not found, please register or login with valid credentials!');
   }
@@ -255,7 +255,7 @@ app.post('/login', (req, res) => {
 // Logs user out and nullifies cookie session and redirects user to login page
 app.post('/logout', (req, res) => {
   req.session.user_id =  null;
-  res.redirect('/urls');
+  res.redirect('/tasks');
 });
 
 

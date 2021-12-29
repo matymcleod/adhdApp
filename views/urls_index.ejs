@@ -24,15 +24,15 @@
       <tbody>
         <% for(let key in urls) { %>
           <tr>
-            <td><a href="<%= urls[key].longURL %>"><%= key %></a></td>
-            <td><a><%= urls[key].longURL %></a></td>
+            <td><a href="<%= tasks[key].longURL %>"><%= key %></a></td>
+            <td><a><%= tasks[key].longURL %></a></td>
             <td>
-              <form method="POST" action="/urls/<%=key%>/delete">
+              <form method="POST" action="/tasks/<%=key%>/delete">
             <button class="btn btn-primary">DELETE</button>
           </form>
         </td>
             <td>
-              <form action="/urls/<%=key%>">
+              <form action="/tasks/<%=key%>">
             <button class="btn btn-primary">EDIT</button>
           </form>
         </td>
