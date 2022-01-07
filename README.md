@@ -1,6 +1,6 @@
 # adhdApp Project
 
-adhdApp is a helper app for persons with adhd. Features include tasks with timers and alerts. Strategies for when plans change, need to stay focussed for longer than possible, self-regulation techniques. Aso, there will be a support community and social aspect.   
+adhdApp is a helper app for persons with adhd. Features include tasks with timers and alerts. Strategies for when plans change, need to stay focussed for longer than possible, self-regulation techniques. Aso, there will be a support community and social aspect. Tools for folks struggling to keep consistent focus and reliable output.
 
 ## Final Product
 
