@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 // Sets app as an express app
 const app = express();
 // This the default server port
-const PORT = 8080;
+const PORT = 8090;
 // All helper functions kept in seperate file
 const { generateRandomString, getUserByEmail, tasksForUser } = require('./helpers');
 
